@@ -6,16 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AssignmentTwo.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System.IO;
 
 namespace AssignmentTwo.Controllers
 {
     public class SchedulesController : Controller
     {
         private readonly AssignmentTwoContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IHttpContextAccessor _session;
 
-        public SchedulesController(AssignmentTwoContext context)
+        public SchedulesController(AssignmentTwoContext context, UserManager<IdentityUser> userManager, IHttpContextAccessor session)
         {
             _context = context;
+            _userManager = userManager;
+            _session = session;
         }
 
         // GET: Schedules
@@ -57,6 +65,7 @@ namespace AssignmentTwo.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 _context.Add(schedule);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -142,6 +151,34 @@ namespace AssignmentTwo.Controllers
             _context.Schedule.Remove(schedule);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        //GET: Schedules/Enrol
+        public async Task<IActionResult> Enrol(int id, [Bind("Id,When,Description,CoachEmail,Location")] Schedule schedule)
+        {
+            var member = _userManager.GetUserName(User);
+            _context.Update(schedule);
+            await _context.SaveChangesAsync();
+            ScheduleMembers schedulemembers = new ScheduleMembers { MemberEmail = member, ScheduleId = schedule.Id };
+            _context.Update(schedulemembers);
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index), "Schedules");
+        }
+
+
+
+        // GET: Schedules/mySchedule
+        [Authorize]
+        public ActionResult MySchedule()
+        {
+
+            var coach = _userManager.GetUserName(User);
+
+            var schedule = _context.Schedule
+                .Where(m => m.CoachEmail == coach);
+                
+            return View("MySchedule", schedule);
         }
 
         private bool ScheduleExists(int id)
