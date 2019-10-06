@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AssignmentTwo.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AssignmentTwo.Controllers
 {
+    [Authorize(Policy = "Administrator")]
+    [Authorize(Policy = "Coach")]
     public class ScheduleMembersController : Controller
     {
         private readonly AssignmentTwoContext _context;

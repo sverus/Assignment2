@@ -50,3 +50,4 @@ D:\BIT\HIT339\Assignment2\Assignment2\assignment2\AssignmentTwo\obj\Debug\netcor
 D:\BIT\HIT339\Assignment2\Assignment2\assignment2\AssignmentTwo\obj\Debug\netcoreapp2.1\Razor\Views\ScheduleMembers\Index.g.cshtml.cs
 D:\BIT\HIT339\Assignment2\Assignment2\assignment2\AssignmentTwo\obj\Debug\netcoreapp2.1\Razor\Views\Schedules\Enrol.g.cshtml.cs
 D:\BIT\HIT339\Assignment2\Assignment2\assignment2\AssignmentTwo\obj\Debug\netcoreapp2.1\Razor\Views\Schedules\MySchedule.g.cshtml.cs
+D:\BIT\HIT339\Assignment2\Assignment2\assignment2\AssignmentTwo\obj\Debug\netcoreapp2.1\Razor\Views\Schedules\EnrolConfirmed.g.cshtml.cs

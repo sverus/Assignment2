@@ -13,6 +13,7 @@ using AssignmentTwo.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AssignmentTwo.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AssignmentTwo
 {
@@ -45,6 +46,17 @@ namespace AssignmentTwo
 
             services.AddDbContext<AssignmentTwoContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AssignmentTwoContext")));
+
+            //permission for admin. change "user@email.com to whatever you like. if you want to add more emails,
+            // add a new line with a new policy like so:
+            //options.AddPolicy("Administrator", policy => policy.RequireUserName("user2@email.com"));
+            services.Configure<AuthorizationOptions>(options =>
+            {
+                options.AddPolicy("Administrator", policy => policy.RequireUserName("admin@tennis.com"));
+                options.AddPolicy("Coach", policy => policy.RequireUserName("boris@tennis.com"));
+                options.AddPolicy("Coach", policy => policy.RequireUserName("roger@tennis.com"));
+                options.AddPolicy("Coach", policy => policy.RequireUserName("nick@tennis.com"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

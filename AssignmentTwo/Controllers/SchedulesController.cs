@@ -13,6 +13,7 @@ using System.IO;
 
 namespace AssignmentTwo.Controllers
 {
+    [Authorize]
     public class SchedulesController : Controller
     {
         private readonly AssignmentTwoContext _context;
@@ -49,13 +50,13 @@ namespace AssignmentTwo.Controllers
 
             return View(schedule);
         }
-
+        [Authorize(Policy = "Administrator")]
         // GET: Schedules/Create
         public IActionResult Create()
         {
             return View();
         }
-
+        [Authorize(Policy = "Administrator")]
         // POST: Schedules/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -72,7 +73,7 @@ namespace AssignmentTwo.Controllers
             }
             return View(schedule);
         }
-
+        [Authorize(Policy = "Administrator")]
         // GET: Schedules/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -88,7 +89,7 @@ namespace AssignmentTwo.Controllers
             }
             return View(schedule);
         }
-
+        [Authorize(Policy = "Administrator")]
         // POST: Schedules/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -123,7 +124,7 @@ namespace AssignmentTwo.Controllers
             }
             return View(schedule);
         }
-
+        [Authorize(Policy = "Administrator")]
         // GET: Schedules/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -141,7 +142,7 @@ namespace AssignmentTwo.Controllers
 
             return View(schedule);
         }
-
+        [Authorize(Policy = "Administrator")]
         // POST: Schedules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -154,20 +155,41 @@ namespace AssignmentTwo.Controllers
         }
 
         //GET: Schedules/Enrol
-        public async Task<IActionResult> Enrol(int id, [Bind("Id,When,Description,CoachEmail,Location")] Schedule schedule)
+        
+        public async Task<IActionResult> Enrol(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var schedule = await _context.Schedule
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (schedule == null)
+            {
+                return NotFound();
+            }
+
+            return View(schedule);
+        }
+        // POST: Schedules/Enrol/5
+        [HttpPost, ActionName("Enrol")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EnrolConfirmed([Bind("Id,When,Description,CoachEmail,Location")] Schedule schedule)
         {
             var member = _userManager.GetUserName(User);
-            _context.Update(schedule);
-            await _context.SaveChangesAsync();
+
+            
+            
             ScheduleMembers schedulemembers = new ScheduleMembers { MemberEmail = member, ScheduleId = schedule.Id };
             _context.Update(schedulemembers);
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index), "Schedules");
+            return RedirectToAction(nameof(Index));
         }
 
 
-
+        [Authorize(Policy = "Coach")]
         // GET: Schedules/mySchedule
         [Authorize]
         public ActionResult MySchedule()
@@ -180,6 +202,8 @@ namespace AssignmentTwo.Controllers
                 
             return View("MySchedule", schedule);
         }
+
+
 
         private bool ScheduleExists(int id)
         {

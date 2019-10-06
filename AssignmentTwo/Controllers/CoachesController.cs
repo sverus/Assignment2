@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AssignmentTwo.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace AssignmentTwo.Controllers
 {
@@ -41,7 +44,7 @@ namespace AssignmentTwo.Controllers
 
             return View(coach);
         }
-
+        [Authorize]
         // GET: Coaches/Create
         public IActionResult Create()
         {
@@ -53,10 +56,22 @@ namespace AssignmentTwo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Email,Biography,PhotoUrl")] Coach coach)
+        public async Task<IActionResult> Create([Bind("Id,Email,Biography,PhotoUrl")] Coach coach, IFormFile PhotoURL)
         {
             if (ModelState.IsValid)
             {
+                //upload an image if there isnt one, store it in wwwroot\images\items
+                if (PhotoURL != null && PhotoURL.Length > 0)
+                {
+                    var fileName = Path.GetFileName(PhotoURL.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\coaches", fileName);
+                    using (var fileSteam = new FileStream(filePath, FileMode.Create))
+                    {
+                        await PhotoURL.CopyToAsync(fileSteam);
+                    }
+                    coach.PhotoUrl = fileName;
+
+                }
                 _context.Add(coach);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

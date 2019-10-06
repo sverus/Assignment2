@@ -10,7 +10,9 @@ namespace AssignmentTwo.Models
         [Column("ID")]
         public int Id { get; set; }
         [Column("ScheduleID")]
+        [Display(Name = "Schedule ID")]
         public int ScheduleId { get; set; }
+        [Display(Name = "Member Email")]
         public string MemberEmail { get; set; }
     }
 }

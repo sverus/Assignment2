@@ -10,8 +10,12 @@ namespace AssignmentTwo.Models
         [Column("ID")]
         public int Id { get; set; }
         public DateTime When { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
+        [Display(Name = "Coach Email")]
         public string CoachEmail { get; set; }
+        [Required]
         public string Location { get; set; }
     }
 }
