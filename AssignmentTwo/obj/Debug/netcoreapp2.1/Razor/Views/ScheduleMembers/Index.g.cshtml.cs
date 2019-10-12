@@ -85,7 +85,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("    <p>\r\n        ");
             EndContext();
             BeginContext(333, 37, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c9b12cd35bc44cf4a6a39c8431397be8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cd5cd21629e84bca9104b9549c1c80ea", async() => {
                 BeginContext(356, 10, true);
                 WriteLiteral("Create New");
                 EndContext();
@@ -115,7 +115,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("    ");
             EndContext();
             BeginContext(389, 317, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5bb2c6cad4294ae88cebb0cd45d79600", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "94533c31ef924753bd159848c0e87a7d", async() => {
                 BeginContext(460, 239, true);
                 WriteLiteral("\r\n        <p>Search your email to view your enrolled members for your schedules.</p>\r\n        <p>\r\n            Coach: <input type=\"text\" name=\"SearchString\">\r\n            <input type=\"submit\" value=\"Filter\" />\r\n        </p>\r\n        \r\n    ");
                 EndContext();
@@ -221,7 +221,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("                        <td>\r\n                            ");
             EndContext();
             BeginContext(1834, 53, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "df16be82d85d4f658aeb23c1ce2f20de", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ffba97854f4c4ea7b0fda28c61e331b4", async() => {
                 BeginContext(1879, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -256,7 +256,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral(" |\r\n                            ");
             EndContext();
             BeginContext(1919, 59, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ed73b139766d449dbe1e904e8ae79bf0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1e4d258d4480444a9cc3e657750ec733", async() => {
                 BeginContext(1967, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -291,7 +291,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral(" |\r\n                            ");
             EndContext();
             BeginContext(2010, 57, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "61eb2818a1484533a089a206c053c1d6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "750fee6addd34c31a3e0ef2468620d59", async() => {
                 BeginContext(2057, 6, true);
                 WriteLiteral("Delete");
                 EndContext();

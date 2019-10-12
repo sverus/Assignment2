@@ -9,7 +9,9 @@ namespace AssignmentTwo.Models
     {
         [Column("ID")]
         public int Id { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Biography { get; set; }
         [Column("PhotoURL")]
         public string PhotoUrl { get; set; }

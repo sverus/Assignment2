@@ -7,6 +7,7 @@ namespace AssignmentTwo.Models
 {
     public partial class Schedule
     {
+        [Display(Name = "Schedule ID")]
         [Column("ID")]
         public int Id { get; set; }
         public DateTime When { get; set; }
