@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -30,13 +32,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+
                     <li><a asp-area="" asp-controller="Schedules" asp-action="Index">Schedules</a></li>
+
                     <li><a asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a></li>
-                    <li><a asp-area="" asp-controller="Schedules" asp-action="MySchedule">Coach schedules</a></li>
-                    <li><a asp-area="" asp-controller="ScheduleMembers" asp-action="index">Enrolled Members</a></li>
+
+                    <li><a asp-area="" asp-controller="Schedules" asp-action="MySchedule">My Coach Schedule</a></li>
+
+                    <li><a asp-area="" asp-controller="ScheduleMembers" asp-action="MyMembers">My Enrolled Members</a></li>
+
+                    <li><a asp-area="" asp-controller="ScheduleMembers" asp-action="index">All Enrolled Members</a></li>
+
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

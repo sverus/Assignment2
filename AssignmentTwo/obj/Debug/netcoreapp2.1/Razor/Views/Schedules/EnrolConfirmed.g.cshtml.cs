@@ -143,7 +143,7 @@ using AssignmentTwo.Models;
             WriteLiteral("\r\n        </dd>\r\n    </dl>\r\n</div>\r\n<div>\r\n    \r\n    ");
             EndContext();
             BeginContext(923, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c43ee716c94a4106ac7f7294b66f3cb4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7669fe40a42a4151b58fb18653d120cb", async() => {
                 BeginContext(945, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();

@@ -14,5 +14,8 @@ namespace AssignmentTwo.Models
         public int ScheduleId { get; set; }
         [Display(Name = "Member Email")]
         public string MemberEmail { get; set; }
+
+        [Display(Name = "Coach Email")]
+        public string CoachEmail { get; set; }
     }
 }

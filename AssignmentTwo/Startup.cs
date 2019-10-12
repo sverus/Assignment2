@@ -39,8 +39,11 @@ namespace AssignmentTwo
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddDefaultUI()
+            .AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -54,8 +57,8 @@ namespace AssignmentTwo
             {
                 options.AddPolicy("Administrator", policy => policy.RequireUserName("admin@tennis.com"));
                 options.AddPolicy("Coach", policy => policy.RequireUserName("boris@tennis.com"));
-                options.AddPolicy("Coach", policy => policy.RequireUserName("roger@tennis.com"));
-                options.AddPolicy("Coach", policy => policy.RequireUserName("nick@tennis.com"));
+                ///options.AddPolicy("Coach", policy => policy.RequireUserName("roger@tennis.com"));
+               /// options.AddPolicy("Coach", policy => policy.RequireUserName("nick@tennis.com"));
             });
         }
 

@@ -12,19 +12,20 @@ using Microsoft.AspNetCore.Identity;
 using System.IO;
 
 namespace AssignmentTwo.Controllers
+    
 {
-    [Authorize]
+    
     public class SchedulesController : Controller
     {
         private readonly AssignmentTwoContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly IHttpContextAccessor _session;
+        
 
-        public SchedulesController(AssignmentTwoContext context, UserManager<IdentityUser> userManager, IHttpContextAccessor session)
+        public SchedulesController(AssignmentTwoContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
-            _session = session;
+            
         }
 
         // GET: Schedules
@@ -155,7 +156,7 @@ namespace AssignmentTwo.Controllers
         }
 
         //GET: Schedules/Enrol
-        
+        [Authorize]
         public async Task<IActionResult> Enrol(int? id)
         {
             if (id == null)
@@ -178,10 +179,8 @@ namespace AssignmentTwo.Controllers
         public async Task<IActionResult> EnrolConfirmed([Bind("Id,When,Description,CoachEmail,Location")] Schedule schedule)
         {
             var member = _userManager.GetUserName(User);
-
-            
-            
-            ScheduleMembers schedulemembers = new ScheduleMembers { MemberEmail = member, ScheduleId = schedule.Id };
+            //posts the enrolment onto the schedulemembers section
+            ScheduleMembers schedulemembers = new ScheduleMembers { MemberEmail = member, ScheduleId = schedule.Id, CoachEmail = schedule.CoachEmail };
             _context.Update(schedulemembers);
 
             await _context.SaveChangesAsync();
@@ -189,14 +188,14 @@ namespace AssignmentTwo.Controllers
         }
 
 
-        [Authorize(Policy = "Coach")]
+        //Allows coaches to view their schedules
         // GET: Schedules/mySchedule
         [Authorize]
         public ActionResult MySchedule()
         {
 
             var coach = _userManager.GetUserName(User);
-
+            
             var schedule = _context.Schedule
                 .Where(m => m.CoachEmail == coach);
                 

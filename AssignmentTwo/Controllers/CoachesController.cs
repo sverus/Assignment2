@@ -22,9 +22,16 @@ namespace AssignmentTwo.Controllers
         }
 
         // GET: Coaches
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Coach.ToListAsync());
+            //enables functionality to search by coach email
+            var coach = from c in _context.Coach
+                        select c;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                coach = coach.Where(s => s.Email.Contains(searchString));
+            }
+            return View(await coach.ToListAsync());
         }
 
         // GET: Coaches/Details/5
@@ -44,7 +51,7 @@ namespace AssignmentTwo.Controllers
 
             return View(coach);
         }
-        [Authorize]
+        [Authorize(Policy = "Administrator")]
         // GET: Coaches/Create
         public IActionResult Create()
         {
@@ -54,13 +61,14 @@ namespace AssignmentTwo.Controllers
         // POST: Coaches/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Policy = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Email,Biography,PhotoUrl")] Coach coach, IFormFile PhotoUrl)
         {
             if (ModelState.IsValid)
             {
-                //upload an image if there isnt one, store it in wwwroot\images\coaches
+                //upload an image if there isnt one, store it in wwwroot\images\coach
                 if (PhotoUrl != null && PhotoUrl.Length > 0)
                 {
                     var fileName = Path.GetFileName(PhotoUrl.FileName);
@@ -78,7 +86,7 @@ namespace AssignmentTwo.Controllers
             }
             return View(coach);
         }
-
+        [Authorize(Policy = "Administrator")]
         // GET: Coaches/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -94,7 +102,7 @@ namespace AssignmentTwo.Controllers
             }
             return View(coach);
         }
-
+        [Authorize(Policy = "Administrator")]
         // POST: Coaches/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -129,7 +137,7 @@ namespace AssignmentTwo.Controllers
             }
             return View(coach);
         }
-
+        [Authorize(Policy = "Administrator")]
         // GET: Coaches/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -147,7 +155,7 @@ namespace AssignmentTwo.Controllers
 
             return View(coach);
         }
-
+        [Authorize(Policy = "Administrator")]
         // POST: Coaches/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

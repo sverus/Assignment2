@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<AssignmentTwo.Models.Schedule>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Schedule";
 }
 
-<h2>Index</h2>
+<h2>My Schedule</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<p>This page only shows your upcoming schedules for coaches.</p>
 <table class="table">
     <thead>
         <tr>
@@ -53,7 +51,7 @@
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Enrolled Members</a>
+                
             </td>
         </tr>
         }

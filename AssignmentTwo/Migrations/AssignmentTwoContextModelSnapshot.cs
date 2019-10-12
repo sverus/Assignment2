@@ -45,11 +45,14 @@ namespace AssignmentTwo.Migrations
                         .HasColumnName("ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CoachEmail");
+                    b.Property<string>("CoachEmail")
+                        .IsRequired();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
-                    b.Property<string>("Location");
+                    b.Property<string>("Location")
+                        .IsRequired();
 
                     b.Property<DateTime>("When");
 
@@ -64,6 +67,8 @@ namespace AssignmentTwo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("ID")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CoachEmail");
 
                     b.Property<string>("MemberEmail");
 

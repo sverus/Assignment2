@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AssignmentTwo.Models.ScheduleMembers>
+    
+@{
+    ViewData["Title"] = "My Members";
+}
+
+    <h2>My Enrolled Members</h2>
+<p>This page will only populate if you have members enrolled to your schedule.</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoachEmail)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScheduleId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CoachEmail)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
